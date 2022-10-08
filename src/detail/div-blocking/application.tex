@@ -1,0 +1,33 @@
+\begin{frame}{应用1}
+	\label{mulf:app:divb1}
+
+	\only<1->{求
+		\[
+			\sum_{i=1}^{\min\{m,n\}}\lfloor\frac{n}{i}\rfloor\lfloor\frac{m}{j}\rfloor
+		\]}
+
+	\only<2->{只需令
+		\[
+			r=\min\left\{\left\lfloor{n\over{\lfloor\frac{n}{l}\rfloor} }\right\rfloor,\left\lfloor{m\over{\lfloor\frac{m}{l}\rfloor} }\right\rfloor\right\}
+		\]}
+\end{frame}
+
+
+\begin{frame}{应用2}
+	\label{mulf:app:divb2}
+
+	\only<1->{如何求
+		\[
+			\sum_{i=1}^n\left\lfloor\frac{n}{ai+b}\right\rfloor
+		\]}
+
+	\only<2->{令 \(\lfloor\frac{n}{al+b}\rfloor=k_l\), 不难发现
+		\[
+			r=\max_{aik_l\leqslant n-bk_l}\{i\}
+		\]}
+
+	\only<3->{显然
+		\[
+			r=\left\lfloor\frac{n-bk_l}{ak_l}\right\rfloor
+		\]}
+\end{frame}

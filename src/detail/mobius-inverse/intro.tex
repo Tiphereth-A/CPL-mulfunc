@@ -1,0 +1,117 @@
+\begin{frame}[fragile]{M\"obius 反演}
+	\begin{theorem}[M\"obius 反演]
+		\only<1->{对于数论函数\(f,g\), 有
+
+			\begin{equation}
+				f=g*\{1\}\iff g=f*\mu
+			\end{equation}
+		}
+
+		\only<2->{或者写成
+			\begin{equation}
+				\forall n\in\mathbb{N}^*,~f(n)=\sum_{d\mid n}g(d)\iff g(n)=\sum_{d\mid n}f(d)\mu\left(\frac{n}{d}\right)
+			\end{equation}
+		}
+	\end{theorem}
+\end{frame}
+
+
+\begin{frame}{证明}
+	\only<1->{如果用卷积证明的话十分简洁
+		\[
+			f=g*\{1\}\iff f*\mu=g*\{1\}*\mu=g*\epsilon=g
+		\]}
+
+	\only<2->{但这里我们给出不使用卷积运算法则的证明方法, 因为这是交换求和次序的绝佳练习, 交换求和次序也是应用 M\"obius 反演解题的重要操作}
+\end{frame}
+
+
+\begin{frame}{证明}
+	\begin{equation}
+		\label{mulf:eq:moi-1}
+		\forall n\in\mathbb{N}^*,~f(n)=\sum_{d\mid n}g(d)
+	\end{equation}
+
+	\begin{equation}
+		\label{mulf:eq:moi-2}
+		\forall n\in\mathbb{N}^*,~g(n)=\sum_{d\mid n}f(d)\mu\left(\frac{n}{d}\right)
+	\end{equation}
+
+	我们要证的即为 (\ref{mulf:eq:moi-1}) \(\iff\) (\ref{mulf:eq:moi-2})
+\end{frame}
+
+
+\begin{frame}{证明}
+	先证 (\ref{mulf:eq:moi-1}) \(\implies\) (\ref{mulf:eq:moi-2})
+
+	若 (\ref{mulf:eq:moi-1}) 成立, 则有
+
+	\begin{equation}
+		\label{mulf:eq:moi-3}
+		\sum_{d\mid n}f(d)\mu\left(\frac{n}{d}\right)=\sum_{d\mid n}\sum_{e\mid d}g(e)\mu\left(\frac{n}{d}\right)
+	\end{equation}
+
+	之后我们交换求和号, 即改变元素的枚举顺序
+\end{frame}
+
+
+\begin{frame}{证明}
+	(\ref{mulf:eq:moi-3}) 是先枚举\(n\)的因子\(d\), 再枚举\(d\)的因子\(e\). 我们要改写成先枚举\(n\)的因子\(e\), 再枚举\(d\), 此时的\(d\)是\(n\)的因子, 同时也是\(e\)的倍数
+
+	从而在交换求和号之后变为
+
+	\begin{equation}
+		\label{mulf:eq:moi-4}
+		\sum_{e\mid n}\sum_{e\mid d\mid n}g(e)\mu\left(\frac{n}{d}\right)=\sum_{e\mid n}g(e)\sum_{e\mid d\mid n}\mu\left(\frac{n}{d}\right)
+	\end{equation}
+\end{frame}
+
+
+\begin{frame}{证明}
+	\only<1-6>{这样做是因为 \(\sum_{e\mid d\mid n}\mu\left(\frac{n}{d}\right)\) 是可以很容易求出来的, 具体操作如下:}
+
+	\only<2-6>{令 \(d'=\frac{d}{e}\), 则条件\(e\mid d\mid n\) 等价于 \(d'\mid\frac{n}{e}\)}
+
+	\only<3-6>{而
+	\[
+		\frac{n}{d}=\frac{n}{e}\cdot\frac{e}{d}={ \frac{n}{e}\over d'}
+	\]}
+
+	\only<4-6>{因此固定\(e\), 则有
+		\[
+			\begin{aligned}
+				\sum_{e\mid d\mid n}\mu\left(\frac{n}{d}\right) & =\sum_{d'\mid\frac{n}{e}}\mu\left({ \frac{n}{e}\over d'}\right) \\
+				                                                & =\sum_{d'\mid\frac{n}{e}}\mu\left(d'\right)                     \\
+				                                                & =\epsilon(d')
+			\end{aligned}
+		\]}
+
+	\only<5-6>{此式表明 \(\sum_{e\mid d\mid n}\mu\left(\frac{n}{d}\right)\) 只有在\(e\)取\(n\)时才为\(1\), 其余时为\(0\)}
+
+	\only<6>{所以 (\ref{mulf:eq:moi-4}) 的最终结果即为\(g(n)\), 故 (\ref{mulf:eq:moi-2}) 成立}
+
+	\only<7>{我们把步骤合并起来}
+
+	\only<8>{若 (\ref{mulf:eq:moi-1}) 成立, 则有
+		\[
+			\begin{array}{rll}
+				                    & \sum_{d\mid n}f(d)\mu\left(\frac{n}{d}\right)                                    & = \sum_{d\mid n}\sum_{e\mid d}g(e)\mu\left(\frac{n}{d}\right)       \\
+				=                   & \sum_{e\mid n}\sum_{e\mid d\mid n}g(e)\mu\left(\frac{n}{d}\right)                & = \sum_{e\mid n}g(e)\sum_{e\mid d\mid n}\mu\left(\frac{n}{d}\right) \\
+				\xlongequal{d'=d/e} & \sum_{e\mid n}g(e)\sum_{d'\mid\frac{n}{e}}\mu\left({ \frac{n}{e}\over d'}\right) & = \sum_{e\mid n}g(e)\sum_{d'\mid\frac{n}{e}}\mu(d')                 \\
+				=                   & \sum_{e\mid n}g(e)\epsilon(d')                                                   & = \sum_{e\mid n}g(e)\epsilon\left(\frac{d}{e}\right)                \\
+				=                   & g(n)
+			\end{array}
+		\]}
+
+	\only<9->{类似可证 (\ref{mulf:eq:moi-1}) \(\impliedby\) (\ref{mulf:eq:moi-2})}
+	\only<10->{, 简要列出步骤
+
+		\[
+			\begin{aligned}
+				\sum_{d\mid n}g(d) & =\sum_{d\mid n}\sum_{e\mid d}\mu\left(\frac{d}{e}\right)f(e)         \\
+				                   & =\sum_{e\mid n}f(e)\sum_{e\mid d\mid n}\mu\left(\frac{d}{e}\right)   \\
+				                   & \xlongequal{d'=d/e}\sum_{e\mid n}f(e)\sum_{d'\mid\frac{n}{e}}\mu(d') \\
+				                   & =f(n)
+			\end{aligned}
+		\]}
+\end{frame}

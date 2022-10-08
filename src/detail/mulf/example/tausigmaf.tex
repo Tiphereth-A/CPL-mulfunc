@@ -1,0 +1,38 @@
+\begin{frame}[fragile]{因子数和因子和的积性}
+	\only<1->{\begin{theorem}
+			\(\tau(n)\) 和 \(\sigma(n)\) 是积性函数
+		\end{theorem}}
+
+	\only<2->{\begin{proof}
+			令\(m,n\)为两互素正整数, 则
+
+			\[
+				\tau(mn)=\sum_{d_1\mid m}\sum_{d_2\mid n}1=\left(\sum_{d_1\mid m}1\right)\left(\sum_{d_2\mid n}1\right)=\tau(m)\tau(n)
+			\]
+
+			\[
+				\sigma(mn)=\sum_{d_1\mid m}\sum_{d_2\mid n}d_1d_2=\left(\sum_{d_1\mid m}d_1\right)\left(\sum_{d_2\mid n}d_2\right)=\sigma(m)\sigma(n)
+			\]
+		\end{proof}}
+\end{frame}
+
+
+\begin{frame}[fragile]{因子数和因子和的表达式}
+	\begin{corollary}
+		\only<1->{设 \(n\) 的标准分解式为
+
+		\[
+			n=\prod_{i=1}^rp_i^{\alpha_i}
+		\]
+
+		则}
+
+		\only<2->{\begin{equation}
+				\tau(n)=\prod_{i=1}^r(\alpha_i+1)
+			\end{equation}}
+
+		\only<3->{\begin{equation}
+				\sigma(n)=\prod_{i=1}^r\frac{p_i^{\alpha_i+1}-1}{p_i-1}
+			\end{equation}}
+	\end{corollary}
+\end{frame}

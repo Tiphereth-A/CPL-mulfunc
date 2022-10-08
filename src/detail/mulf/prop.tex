@@ -1,0 +1,24 @@
+\begin{frame}{性质}
+	\label{mulf:prop:mulf}
+
+	\begin{theorem}
+		\label{mulf:th:prop}
+
+		积性函数关于加法, 减法, 乘法, 卷积封闭, 即: 若 \(f,g\) 为积性函数, 则 \(f+g\), \(f-g\), \(fg\), \(f*g\) 均为积性函数
+	\end{theorem}
+\end{frame}
+
+
+\begin{frame}{证明 (卷积的封闭性)}
+	令 \(h=f*g\), 则 \(\forall (m,n)=1\),
+
+	\[
+		\begin{aligned}
+			h(mn) & =\sum_{d\mid mn}f(d)g\left(\frac{mn}{d}\right)                                                                                \\
+			      & =\sum_{d_1\mid m}\sum_{d_2\mid n}f(d_1d_2)g\left(\frac{m}{d_1}\frac{n}{d_2}\right)                                            \\
+			      & =\sum_{d_1\mid m}\sum_{d_2\mid n}f(d_1)f(d_2)g\left(\frac{m}{d_1}\right)g\left(\frac{n}{d_2}\right)                           \\
+			      & =\left(\sum_{d_1\mid m}f(d_1)g\left(\frac{m}{d_1}\right)\right)\left(\sum_{d_2\mid n}f(d_2)g\left(\frac{n}{d_2}\right)\right) \\
+			      & =h(m)h(n)
+		\end{aligned}
+	\]
+\end{frame}

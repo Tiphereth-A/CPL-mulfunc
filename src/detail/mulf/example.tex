@@ -1,0 +1,39 @@
+\begin{frame}{例子}
+	\label{mulf:ssec:example}
+
+	\begin{itemize}
+		\item<1-> \textbf{单位函数} \(\epsilon(n):=[n=1]\) (完全积性函数)
+		\item<2-> \(\operatorname{id}_k(n):=n^k\) (完全积性函数)
+		\item<3-> \(e(n):=\operatorname{id}_0(n)=\{1\}\) (完全积性函数)
+		\item<4-> \textbf{恒等函数} \(\operatorname{id}(n):=\operatorname{id}_1(n)\) (积性函数)
+		\item<5-> \(\sigma_k(n):=e\sum_{d\mid n}d^k=\operatorname{id}_k*\{1\}\) (积性函数)
+		\item<6-> \textbf{因子个数} \(\tau(n):=\sigma_0(n)\) (积性函数)
+		\item<7-> \textbf{因子和} \(\sigma(n):=\sigma_1(n)\) (积性函数)
+		\item<8-> \textbf{Euler 函数} \(\varphi(n):=\sum_{i=1}^n[(i,n)=1]\) (积性函数)
+		\item<9-> \textbf{M\"obius 函数} \(\mu(n):=[\forall p\in\text{Prime}^+,p^2\nmid n]*(-1)^{\omega(n)}\) (加性函数)
+	\end{itemize}
+\end{frame}
+
+
+\subsubsection{因子数和因子和}
+\label{mulf:ssec:tausigmaf}
+
+\input{src/detail/mulf/example/tausigmaf.tex}
+
+
+\subsubsection{Euler 函数}
+\label{mulf:ssec:eulerf}
+
+\input{src/detail/mulf/example/eulerf.tex}
+
+
+\subsubsection{M\"obius 函数}
+\label{mulf:ssec:mobiusf}
+
+\input{src/detail/mulf/example/mobiusf.tex}
+
+
+\subsubsection{常用结论}
+\label{mulf:ssec:fc}
+
+\input{src/detail/mulf/example/fc.tex}

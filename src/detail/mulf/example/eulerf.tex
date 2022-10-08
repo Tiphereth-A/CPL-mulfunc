@@ -1,0 +1,48 @@
+\begin{frame}{Euler 函数}
+	\label{mulf:def:eulerf}
+
+	指的是 \([1,n]\) 中所有与 \(n\) 互素的数
+\end{frame}
+
+
+\begin{frame}{性质}
+	\label{mulf:prop:eulerf}
+
+	\begin{enumerate}
+		\item<1-> \(\varphi(n)\)是积性函数
+		\item<2-> (1 的推论) 若\(n\)为奇数, 则\(\varphi(2n)=\varphi(n)\)
+		\item<3-> 若\(p\)为素数, \(a\)为自然数, 则\(\varphi(p^a)=p^a-p^{a-1}\)
+			特别地, \(\varphi(p)=p-1\)
+		\item<4-> (1,3 的推论) 设\(n=\prod_{i=1}^{\omega(n)}p_i^{\alpha_i}\), 则
+			\[
+				\varphi(n)=\prod_{i=1}^{\omega(n)}p_i^{\alpha_i}\left(1-\frac{1}{p_i}\right)=n\prod_{i=1}^{\omega(n)}\frac{p_i-1}{p_i}
+			\]
+		\item<5-> 当\(n>2\)时, \(\varphi(n)\)为偶数
+	\end{enumerate}
+\end{frame}
+
+
+\begin{frame}{性质1(积性) 证明}
+	\only<1->{\begin{theorem}
+			\(\varphi(n)\) 是积性函数
+		\end{theorem}}
+
+	\only<2-4>{设\(n,m\)是互素的正整数, 我们将 \(\{0,1,\dots,mn-1\}\) 如下列出
+
+		\[
+			\begin{matrix}
+				0      & 1        & \dots  & m-1    \\
+				m      & m+1      & \dots  & 2m-1   \\
+				\vdots & \vdots   & \ddots & \vdots \\
+				(n-1)m & (n-1)m+1 & \dots  & mn-1
+			\end{matrix}
+		\]}
+
+	\only<3-4>{考察第 \(j\) 列的数 \(im+j,~i=0,1,\dots,n-1\), 其均属于模 \(m\) 的同余类 \(\overline{j},~j=0,1,\dots,m-1\), 故共有 \(\varphi(m)\) 列中的数与 \(m\) 互素}
+
+	\only<4>{考察第 \(j\) 行的数 \(in+j,~i=0,1,\dots,m-1\), 其均属于模 \(n\) 的同余类 \(\overline{j},~j=0,1,\dots,n-1\), 故共有 \(\varphi(n)\) 行中的数与 \(m\) 互素}
+
+	\only<5->{不难发现, 只有同时在这 \(\varphi(m)\) 列和 \(\varphi(n)\) 行中的数才和 \(mn\) 互素}
+
+	\only<6->{故\(\varphi(mn)=\varphi(m)\varphi(n)\)}
+\end{frame}

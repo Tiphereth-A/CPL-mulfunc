@@ -1,0 +1,115 @@
+\begin{frame}[fragile,allowframebreaks]{CodeForces 1139 D Steps to One}
+	\label{mulf:example:cf1139d}
+
+	\textbf{题目描述}
+
+	Vivek initially has an empty array \(a\) and some integer constant \(m\)
+
+	He performs the following algorithm:
+
+	1. Select \(a\) random integer \(x\) uniformly in range from \(1\) to \(m\) and append it to the end of \(a\)
+	1. Compute the greatest common divisor of integers in \(a\)
+	1. In case it equals to \(1\), break
+	1. Otherwise, return to step \(1\)
+
+	Find the expected length of \(a\). It can be shown that it can be represented as \(\frac{P}{Q}\) where \(P\) and \(Q\) are coprime integers and \(Q\ne 0\pmod{10^9+7}\). Print the value of \(P\cdot Q^{-1}\pmod{10^9+7}\)
+
+	\textbf{输入格式}
+
+	The first and only line contains a single integer \(m\) (\(1\leqslant m\leqslant 100000\))
+
+	\textbf{输出格式}
+
+	Print a single integer — the expected length of the array \(a\) written as \(P\cdot Q^{-1}\pmod{10^9+7}\)
+
+	\textbf{样例输入1}
+
+	\includecode[common]{cf1139d_1.in}
+
+	\textbf{样例输出1}
+
+	\includecode[common]{cf1139d_1.ans}
+
+	\textbf{样例输入2}
+
+	\includecode[common]{cf1139d_2.in}
+
+	\textbf{样例输出2}
+
+	\includecode[common]{cf1139d_2.ans}
+
+	\textbf{样例输入3}
+
+	\includecode[common]{cf1139d_3.in}
+
+	\textbf{样例输出3}
+
+	\includecode[common]{cf1139d_3.ans}
+
+	\textbf{说明}
+
+	In the first example, since Vivek can choose only integers from \(1\) to \(1\), he will have \(a=[1]\) after the first append operation, and after that quit the algorithm. Hence the length of \(a\) is always \(1\), so its expected value is \(1\) as well
+
+	In the second example, Vivek each time will append either \(1\) or \(2\), so after finishing the algorithm he will end up having some number of \(2\)'s (possibly zero), and \(a\) single \(1\) in the end. The expected length of the list is \(1\cdot{1\over 2^{1}}+2\cdot{1\over 2^{2}}+3\cdot{1\over 2^{3}}+...=2\)
+\end{frame}
+
+
+\begin{frame}{题解}
+	\only<1-2>{对一个初始为空的正整数序列 \(a\), 每次随机在 \([1,m]_{\mathbb{N}}\) 内选一个数插入, 当其最大公因数为 \(1\) 时停止, 问序列期望长度 \(\in\mathbb{Z}_p^*,~p=10^9+7\)}
+
+	\only<2>{std 是 \(O(m\log m)\) 的概率 DP, 这里讲复杂度更优的杜教筛做法}
+
+	\only<3>{首先推式子, 令事件 \(X\) 为序列长度, 则
+
+		\[
+			\begin{aligned}
+				E(X) & =\sum_{i=1}^{\infty}iP(X=i)               \\
+				     & =\sum_{i=1}^{\infty}\sum_{j=1}^iP(X=i)    \\
+				     & =\sum_{i=1}^{\infty}P(X\geqslant i)       \\
+				     & =1+\sum_{i=1}^{\infty}(1-P(X\leqslant i))
+			\end{aligned}
+		\]}
+
+
+	\only<4-5>{\begin{tabular}{ll|l}
+			\(E(X)\) & \(=1+\sum_{i=1}^{\infty}(1-P(X\leqslant i))\)                                                                &                                                               \\
+			         & \(=1+\sum_{i=1}^{\infty}\left(1-P\left(\gcd_{j=1}^ia_i=1\right)\right)\)                                     & 由题意立得                                                    \\
+			         & \(=1+\sum_{i=1}^{\infty}\left(1-\sum_{d=1}^m\mu(d)\left({\lfloor\frac{m}{d}\rfloor\over m}\right)^i\right)\) & 容斥/M\"obius 反演                                            \\
+			         & \(=1-\sum_{i=1}^{\infty}\sum_{d=2}^m\mu(d)\left({\lfloor\frac{m}{d}\rfloor\over m}\right)^i\)                & 不难注意到 \(d=1\) 时,                                        \\
+			         &                                                                                                              & \(\mu(d)\left({\lfloor\frac{m}{d}\rfloor\over m}\right)^i=1\) \\
+			         &                                                                                                              & (结合题意想想为何会这样)                                      \\
+			         & \(=1-\sum_{d=2}^m\mu(d)\sum_{i=1}^{\infty}\left({\lfloor\frac{m}{d}\rfloor\over m}\right)^i\)                & 交换求和号以处理掉级数                                        \\
+			         & \(=1-\sum_{d=2}^m\mu(d){\lfloor\frac{m}{d}\rfloor\over m-\lfloor\frac{m}{d}\rfloor}\)                        & 考虑几何级数                                                  \\
+		\end{tabular}}
+
+	\only<5>{之后就很显然了, 我们做个杜教筛+整除分块就好了}
+
+	\only<6->{可以加如下常数优化
+
+		\begin{itemize}
+			\item<7-> 预先算一遍 \(\sum_{i=1}^m\mu(i)\), 这样整除分块过程中要求的所有 \(\sum\mu\) 就都被求过一遍了
+			\item<8-> 因为我们往往使用 \texttt{map} 存 \(\sum\mu\), 所以在整除分块的过程中可以用变量记录上一步的 \(\sum\mu\)
+		\end{itemize}}
+\end{frame}
+
+
+\begin{frame}{时间复杂度}
+	假设
+
+	\begin{itemize}
+		\item<1-> 预先筛出 \(\mu(i),~i=1,2,...,n\)
+		\item<2-> \(f(x)=\lfloor\frac{m}{x}\rfloor\)
+		\item<3-> 杜教筛求 \(\sum_{i=1}^n\mu(i)\) 的时间复杂度为 \(\Theta(T(n))\)
+	\end{itemize}
+
+	\only<4->{则时间复杂度为
+
+		\[
+			\Theta\left(n+T(n)+\sum_{i\in f([2,m]_{\mathbb{N}})}\log p\right)=O\left(n+\frac{m}{\sqrt n}+\sqrt m\log p\right)
+		\]}
+\end{frame}
+
+
+\begin{frame}[fragile,allowframebreaks]{实现}
+	\includecode[c++]{cf1139d.cpp}
+\end{frame}

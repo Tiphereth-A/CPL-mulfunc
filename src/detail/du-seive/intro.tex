@@ -1,0 +1,26 @@
+\begin{frame}{介绍}
+	\label{mulf:intro:duseive}
+
+	\only<1-2,4>{杜教筛是一种在亚线性时间复杂度的求数论函数前缀和的算法}
+
+	\only<2,4>{\begin{theorem}{杜教筛}
+			设\(f,g\)是数论函数, \(S(n):=\sum_{i=1}^nf(i)\), 则
+
+			\[
+				g(1)S(n)=\sum_{i=1}^n(f*g)(i)-\sum_{i=2}^ng(i)S\left(\left\lfloor\frac{n}{i}\right\rfloor\right)
+			\]
+		\end{theorem}}
+
+	\only<3>{\begin{proof}
+			\[
+				\begin{aligned}
+					\sum_{i=1}^n(f*g)(i) & =\sum_{i=1}^n\sum_{d\mid i}f(d)g\left(\frac{i}{d}\right)                     \\
+					                     & =\sum_{d=1}^ng(d)\sum_{i=1}^{\lfloor\frac{n}{d}\rfloor}f(i)                  \\
+					                     & =\sum_{d=1}^ng(d)S\left(\left\lfloor\frac{n}{d}\right\rfloor\right)          \\
+					                     & =g(1)S(n)+\sum_{i=2}^ng(i)S\left(\left\lfloor\frac{n}{i}\right\rfloor\right)
+				\end{aligned}
+			\]
+		\end{proof}}
+
+	\only<4->{如果我们选取的 \(g\), 使 \(\sum_{i=1}^n(f*g)(i)\) 和 \(g\) 的前缀和都能方便地算出来, 那么我们就可以方便地算出 \(S(n)\)}
+\end{frame}

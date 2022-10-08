@@ -1,0 +1,131 @@
+\begin{frame}{M\"obius 函数}
+	\label{mulf:def:mobiusf}
+
+	\only<1->{设\(n=\prod_{i=1}^{\omega(n)}p_i^{\alpha_i}\), 则
+
+	\[
+		\mu(n)=\begin{cases}
+			0,                & \exists i\in[1,\omega(n)],~s.t.~\alpha_i>1 \\
+			(-1)^{\omega(n)}, & otherwise
+		\end{cases}
+	\]}
+
+	\only<2->{或者说, \(\mu(n)\)满足如下条件:}
+
+	\begin{itemize}
+		\item<3-> 若\(n\)中有平方因子, 则\(\mu(n)=0\)
+
+			\only<4->{平方因子即满足\(\exists a\in\mathbb{Z}^*, a^2\mid n\)的因子}
+
+			\only<5->{显然, \(n\)中有平方因子等价于\(n\)中有平方素因子}
+
+		\item<6-> 若\(n\)中无平方因子, 则\(\mu(n)=(-1)^{\omega(n)}\), \(\omega(n)\)即为\(n\)的本质不同素因子个数
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{性质}
+	\label{mulf:prop:mobiusf}
+
+	\begin{enumerate}
+		\item<1-> \(\mu\)是积性函数
+		\item<2-> \[
+				\sum_{d\mid n}\mu(d)=\epsilon(n)
+			\]
+
+			\only<3->{即
+
+				\[
+					\mu*\{1\}=\epsilon
+				\]}
+		\item<4-> (上一条的推论) \[
+				[(x,y)=1]=\sum_{d\mid (x,y)}\mu(d)
+			\]
+	\end{enumerate}
+\end{frame}
+
+
+\begin{frame}{性质1 证明}
+	\only<1->{\begin{theorem}
+			\begin{equation}
+				\forall m,n\in\mathbb{N}^*,~(m,n)=1\implies\mu(mn)=\mu(m)\mu(n)
+			\end{equation}
+		\end{theorem}}
+
+	\only<2-3>{设 \(n,m\) 是互素的正整数, 若 \(m\) 或 \(n\) 有平方因子, 则 \(\mu(mn)=0=\mu(m)\mu(n)\)}
+
+	\only<3->{否则, 设
+
+	\[
+		m=\prod_{i=1}^rp_i,n=\prod_{i=1}^sq_i
+	\]
+
+	其中 \(p_{1},p_{2},\dots,p_{r},q_{1},q_{2},\dots,q_{s}\) 是两两不同的素数}
+
+	\only<4->{从而 \(mn=(\prod_{i=1}^rp_i)(\prod_{i=1}^sq_i)\) 是 \(r+s\) 个不同素数的乘积}
+	\only<5->{, 有
+
+		\[
+			\mu(mn)=(-1)^{r+s}=(-1)^r(-1)^s=\mu(m)\mu(n)
+		\]}
+\end{frame}
+
+
+\begin{frame}{性质2 证明}
+	\only<1->{\begin{theorem}
+			\begin{equation}
+				\mu*\{1\}=\epsilon
+			\end{equation}
+		\end{theorem}}
+
+	\only<2->{令
+
+		\[
+			f(n)=(\mu*\{1\})(n)=\sum_{d\mid n}\mu(d)
+		\]
+
+		易得 \(f(1)=\mu(1)=1\)}
+
+	\only<3->{接下来不妨令 \(n\) 为大于 \(1\) 的整数, 下面给出两种证法}
+\end{frame}
+
+
+\begin{frame}{证明1 (直接证)}
+	\only<1->{对于大于 \(1\) 的整数 \(n\) 做标准分解 \(n=\prod_{i=1}^rp_i^{\alpha_i}\), 则 \(f(n)\) 是 \(\mu(d)\) 的和, 其中 \(d\) 是 \(p_{1},p_{2},\dots,p_{r}\) 中一部分素数的乘积}
+
+	\only<2->{令 \(D_{i}\) 表示 \(p_{1},p_{2},\dots,p_{r}\) 中某 \(i\) 个数的乘积构成的集合, 则 \(\forall d\in D_i,~\mu(d)=(-1)^i\)}
+
+	\only<3->{而
+		\[
+			|D_i|=\binom{r}{i}=\frac{r!}{i!(r-i)!}
+		\]}
+
+	\only<4->{因此
+		\[
+			f(n)=\sum_{i=1}^r\binom{r}{i}(-1)^i=(1-1)^r=0
+		\]}
+\end{frame}
+
+
+\begin{frame}{证明2 (利用积性)}
+	\only<1-3>{由\(f=\mu*\{1\}\)可知, \(f\)必为积性函数}
+
+	\only<2-3>{另一方面, \(\epsilon\)也为积性函数}
+
+	\only<3->{因此, 我们只需证
+		\[
+			\forall p\in\text{Prime}^+,\forall\alpha\in\mathbb{N}^*,~f(p^{\alpha})=\epsilon(p^{\alpha})
+		\]}
+
+	\only<4->{对上述的\(p\)和\(\alpha\), 一方面, \(\epsilon(p^{\alpha})=0\)}
+
+	\only<5->{另一方面,
+
+		\[
+			\begin{aligned}
+				f(p^{\alpha}) & =\sum_{i=0}^{\alpha}\mu(p^i) \\
+				              & =\mu(1)+\mu(p)               \\
+				              & =0
+			\end{aligned}
+		\]}
+\end{frame}
