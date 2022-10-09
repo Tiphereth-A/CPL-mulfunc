@@ -1,0 +1,51 @@
+\begin{frame}{引理1}
+	\begin{lemma}
+		\label{mulf:lm:divb1}
+
+		\begin{equation}
+			\forall a,b,c\in\mathbb{Z},\left\lfloor\frac{a}{bc}\right\rfloor=\left\lfloor{\left\lfloor\frac{a}{b}\right\rfloor\over c}\right\rfloor
+		\end{equation}
+	\end{lemma}
+\end{frame}
+
+
+\begin{frame}{证明}
+	\only<1->{注意到
+		\[
+			\frac{a}{b}=\left\lfloor\frac{a}{b}\right\rfloor+\left\{\frac{a}{b}\right\}
+		\]
+
+		其中\(\{\frac{a}{b}\}\)是\(a\over b\)的小数部分}
+
+	\only<2->{故
+		\[
+			\begin{aligned}
+				\left\lfloor\frac{a}{bc}\right\rfloor & =\left\lfloor\frac{a}{b}\cdot\frac{1}{c}\right\rfloor                                                             \\
+				                                      & =\left\lfloor\left(\left\lfloor\frac{a}{b}\right\rfloor+\left\{\frac{a}{b}\right\}\right)\frac{1}{c}\right\rfloor \\
+				                                      & =\left\lfloor{\left\lfloor\frac{a}{b}\right\rfloor\over c}+\left\{\frac{a}{b}\right\}\frac{1}{c}\right\rfloor     \\
+				                                      & =\left\lfloor{\left\lfloor\frac{a}{b}\right\rfloor\over c}\right\rfloor
+			\end{aligned}
+		\]}
+\end{frame}
+
+
+\begin{frame}{引理2}
+	\only<1->{\begin{lemma}
+			\label{mulf:lm:divb2}
+
+			对任意正整数\(n\), \(\lfloor\frac{n}{i}\rfloor,~i=1,2,\dots,n\)的取值不超过\(\lfloor2\sqrt{n}\rfloor\)种
+
+			即
+			\begin{equation}
+				\forall n\in\mathbb{N}^*,\left|\left\{\left\lfloor\frac{n}{i}\right\rfloor\big|~i=1,2,\dots,n\right\}\right|\leqslant\lfloor2\sqrt{n}\rfloor
+			\end{equation}
+		\end{lemma}}
+
+	\only<2->{\begin{proof}
+			当\(i\leqslant\sqrt{n}\)时, \(\lfloor\frac{n}{i}\rfloor\)至多有\(\sqrt{n}\)种取值
+
+			当\(i>\sqrt{n}\)时, 有\(\lfloor\frac{n}{i}\rfloor\leqslant\sqrt{n}\), 此时\(\lfloor\frac{n}{i}\rfloor\)也至多有\(\sqrt{n}\)种取值
+
+			所以\(\lfloor\frac{n}{i}\rfloor,~i=1,2,\dots,n\)至多有\(\lfloor2\sqrt{n}\rfloor\)种取值
+		\end{proof}}
+\end{frame}

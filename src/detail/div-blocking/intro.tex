@@ -1,0 +1,56 @@
+\begin{frame}{数论分块 / 整除分块}
+	\label{mulf:intro:divb}
+
+	\only<1->{整除分块主要是用于快速求 \(\sum_{i=1}^n\lfloor\frac{n}{i}\rfloor\) 的算法}
+
+	\only<2>{朴素求法的时间复杂度自然是 \(O(n)\)}
+
+	\only<3->{为了方便叙述, 我们举个例子:
+
+		令\(n=15\), \(f(i)=\lfloor\frac{n}{i}\rfloor\) 我们可列出下表}
+
+	\only<4->{\begin{tabular}{ll}
+			\hline
+			\(f(i)\) & \(i\)的范围 \\
+			\hline
+			15       & \([1,1]\)   \\
+			7        & \([2,2]\)   \\
+			5        & \([3,3]\)   \\
+			3        & \([4,5]\)   \\
+			2        & \([6,7]\)   \\
+			1        & \([8,15]\)  \\
+			\hline
+		\end{tabular}}
+
+	\only<5->{我们可以发现, \(f\) 像对应的原象是一段区间, 所以我们可以考虑直接求出对应区间长度, 从而就能快速求值}
+\end{frame}
+
+
+\begin{frame}{算法流程}
+	\begin{enumerate}
+		\item<1-> 令区间左右端点分别为\(l,r\), 答案为\(S\)
+		\item<2-> 初始时, \(l\leftarrow1,\ S\leftarrow0\)
+		\item<3-> 计算 \(r\)
+		\item<4-> \(S\leftarrow S+(r-l+1)\left\lfloor\frac{n}{l}\right\rfloor\)
+		\item<5-> \(l\leftarrow r+1\), 若 \(l\leqslant n\) 则回到 3
+	\end{enumerate}
+
+	\only<6>{关键就在于如何求 \(r\)}
+
+	\only<7->{令 \(\left\lfloor\frac{n}{l}\right\rfloor=k_l\), 不难发现
+		\[
+			r=\max_{ik_l\leqslant n}\{i\}
+		\]}
+
+	\only<8->{ 显然
+		\[
+			r=\left\lfloor\frac{n}{k_l}\right\rfloor=\left\lfloor{n\over{\lfloor\frac{n}{l}\rfloor} }\right\rfloor
+		\]}
+
+	\only<9->{\textbf{时间复杂度} 由引理 (\ref{mulf:lm:divb2}) 可知是\(O(\sqrt{n})\)}
+\end{frame}
+
+
+\begin{frame}[fragile,allowframebreaks]{实现}
+	\includecode[c++]{get_sum.cpp}
+\end{frame}

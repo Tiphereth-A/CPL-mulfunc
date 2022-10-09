@@ -1,0 +1,18 @@
+\begin{frame}[fragile]{伪代码}
+	\label{mulf:ssec:duseive-psdcode}
+
+	\begin{algorithm}[H]
+		\caption{DU's seive}\label{mulf:algo:duseive}
+		\begin{algorithmic}
+			\Require \(f, g\) are numeric functions; \(n>0\); \(g(1)=1\)
+			\Ensure \(a=\operatorname{SUMF}(f,g,n)\)
+			\State \(a \gets \sum_{i=1}^n \{f*g\}(i)\)
+			\State \(l \gets\) 2
+			\While{\(l \leqslant n\)}
+			\State \(r \gets \left\lfloor {n \over \left\lfloor \frac{n}{l} \right\rfloor} \right\rfloor\)
+			\State \(a \gets a-\left(\sum_{i=l}^r g(i)\right)\cdot\texttt{SUMF}\left(f,g,\left\lfloor \frac{n}{l} \right\rfloor\right)\)
+			\State \(l \gets r+1\)
+			\EndWhile
+		\end{algorithmic}
+	\end{algorithm}
+\end{frame}

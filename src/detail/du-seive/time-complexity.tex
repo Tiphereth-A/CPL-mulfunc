@@ -1,0 +1,27 @@
+\begin{frame}{时间复杂度}
+	\label{mulf:ssec:duseive-time-complexity}
+
+	\only<1>{设求出\(S(n)\)的时间函数为\(T(n)\), 则
+
+		\[
+			\begin{aligned}
+				O(T(n)) & =O\left(\sum_{i=1}^{\sqrt n}\left(O(\sqrt{i})+O\left(\sqrt\frac{n}{i}\right)\right)\right) \\
+				        & =O\left(\int_1^{\sqrt{n}}\left(\sqrt{x}+\sqrt\frac{n}{x}\right)\mathrm{d}x\right)          \\
+				        & =O(n^\frac{3}{4})
+			\end{aligned}
+		\]}
+
+	\only<2->{如果我们能够预处理出 \(S(i),~i=1,2,\dots,m\), 设预处理的时间复杂度为 \(O(W(m))\), 则时间复杂度可变为
+
+		\[
+			\begin{aligned}
+				O(T(n)) & =O\left(\sum_{i=1}^{\lfloor\frac{n}{m}\rfloor}O\left(\sqrt\frac{n}{i}\right)+W(m)\right) \\
+				        & =O\left(\int_1^{\lfloor\frac{n}{m}\rfloor}\sqrt\frac{n}{x}\mathrm{d}x+W(m)\right)        \\
+				        & =O\left(\frac{n}{\sqrt m}+W(m)\right)
+			\end{aligned}
+		\]}
+
+	\only<3->{以线性筛作为预处理方式为例, 此时\(O(W(m))=O(m)\)
+
+		由平均值不等式可知, 当\(m=(\frac{n}{2})^\frac{2}{3}\)时, 其时间复杂度最小, 为\(O(n^\frac{2}{3})\)}
+\end{frame}

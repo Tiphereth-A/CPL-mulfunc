@@ -1,0 +1,16 @@
+\begin{frame}{求 Euler 函数值}
+	\label{mulf:algo:euler-single}
+
+	按
+
+	\[
+		\varphi(n)=n\prod_{i=1}^{\omega(n)}\frac{p_i-1}{p_i}
+	\]
+
+	计算即可
+\end{frame}
+
+
+\begin{frame}[fragile]{实现}
+	\includecode[c++]{euler_single.cpp}
+\end{frame}
